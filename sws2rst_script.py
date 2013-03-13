@@ -11,17 +11,19 @@ def run_sage_converter(sws_file_path):
 
 ''' Does some modification to the rst file i.e. python syntax highlight '''
 def correct_sws2rst(rst_file_path):
-    in_file = open(rst_file_path, "r")
-    file_line_list = in_file.readlines()      
-    in_file.close()
+    try:
+        in_file = open(rst_file_path, "r")
+        file_line_list = in_file.readlines()      
+        in_file.close()
     
-    out_file = open(rst_file_path, "w")
-    post_subst_list = map(lambda x: re.sub("^::", ".. code-block:: python", x),  file_line_list) 
+        out_file = open(rst_file_path, "w")
+        post_subst_list = map(lambda x: re.sub("^::", ".. code-block:: python", x),  file_line_list) 
 
-    out_file.write("")
-    out_file.write("".join(post_subst_list ))
-    out_file.close()
-
+        out_file.write("")
+        out_file.write("".join(post_subst_list ))
+        out_file.close()
+    except IOError as e:
+        print "Error: file does not exist !!!"
     
 if __name__ == "__main__":
     sws_file_path = sys.argv[1]
