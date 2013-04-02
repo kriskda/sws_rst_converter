@@ -32,6 +32,7 @@ class Sws2RstConverter(Converter):
             post_subst_list = map(lambda x: re.sub("^::", ".. code-block:: python", x),  file_line_list) 
             post_subst_list = map(lambda x: x.replace("&gt;", ">"),  post_subst_list) 
             post_subst_list = map(lambda x: x.replace("&lt;", "<"),  post_subst_list)
+            post_subst_list = map(lambda x: x.replace("&amp;", "&"),  post_subst_list)
             post_subst_list = map(lambda x: x.replace(".. MATH::", "\n.. MATH::"),  post_subst_list)  
 
             post_subst_list = map(lambda x: re.sub("<[^aA].*?>", "", x),  post_subst_list) 
