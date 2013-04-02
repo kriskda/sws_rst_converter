@@ -34,8 +34,8 @@ class Sws2RstConverter(Converter):
             post_subst_list = map(lambda x: x.replace("&lt;", "<"),  post_subst_list)
             post_subst_list = map(lambda x: x.replace(".. MATH::", "\n.. MATH::"),  post_subst_list)  
 
-            post_subst_list = map(lambda x: re.sub("<[sS].*?>", "", x),  post_subst_list) 
-            post_subst_list = map(lambda x: re.sub("</[sS].*?>", "", x),  post_subst_list) 
+            post_subst_list = map(lambda x: re.sub("<[^aA].*?>", "", x),  post_subst_list) 
+            post_subst_list = map(lambda x: re.sub("</[^aA].*?>", "", x),  post_subst_list) 
 
             out_file.write("")
             out_file.write("".join(post_subst_list ))
