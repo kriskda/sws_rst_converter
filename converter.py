@@ -3,6 +3,10 @@ import os
 import re
 
 
+''' 
+    Parent class which contain SAGE_ROOT path. 
+    Change before first use.
+'''
 class Converter(object):
     SAGE_ROOT = "/home/kris/sage/sage-5.6_shit/"
 
@@ -26,6 +30,9 @@ class Sws2RstConverter(Converter):
     
             out_file = open(rst_file_path, "w")
             post_subst_list = map(lambda x: re.sub("^::", ".. code-block:: python", x),  file_line_list) 
+            post_subst_list = map(lambda x: x.replace("&gt;", ">"),  post_subst_list) 
+            post_subst_list = map(lambda x: x.replace("&lt;", "<"),  post_subst_list)
+            post_subst_list = map(lambda x: x.replace(".. MATH::", "\n.. MATH::"),  post_subst_list)  
 
             out_file.write("")
             out_file.write("".join(post_subst_list ))
