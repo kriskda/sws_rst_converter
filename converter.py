@@ -35,8 +35,16 @@ class Sws2RstConverter(Converter):
             post_subst_list = map(lambda x: x.replace("&amp;", "&"),  post_subst_list)
             post_subst_list = map(lambda x: x.replace(".. MATH::", "\n.. MATH::"),  post_subst_list)  
 
+            # Remove html tags except <a>
             post_subst_list = map(lambda x: re.sub("<[^aA].*?>", "", x),  post_subst_list) 
             post_subst_list = map(lambda x: re.sub("</[^aA].*?>", "", x),  post_subst_list) 
+
+            # Correct list items
+            post_subst_list = map(lambda x: re.sub("^ #", "#", x),  post_subst_list) 
+            post_subst_list = map(lambda x: re.sub("^ -", "-", x),  post_subst_list) 
+
+            post_subst_list = map(lambda x: re.sub("(^#.*)", "\\1 \n", x),  post_subst_list) 
+            post_subst_list = map(lambda x: re.sub("(^-.*)", "\\1 \n", x),  post_subst_list) 
 
             out_file.write("")
             out_file.write("".join(post_subst_list ))
