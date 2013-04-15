@@ -4,7 +4,7 @@ import re
 
 
 ''' 
-    Parent class which contain SAGE_ROOT path. 
+    Parent class which contains SAGE_ROOT path. 
     Change before first use.
 '''
 class Converter(object):
@@ -35,9 +35,9 @@ class Sws2RstConverter(Converter):
             post_subst_list = map(lambda x: x.replace("&amp;", "&"),  post_subst_list)
             post_subst_list = map(lambda x: x.replace(".. MATH::", "\n.. MATH::"),  post_subst_list)  
 
-            # Remove html tags except <a>
-            post_subst_list = map(lambda x: re.sub("<[^aA].*?>", "", x),  post_subst_list) 
-            post_subst_list = map(lambda x: re.sub("</[^aA].*?>", "", x),  post_subst_list) 
+            # Remove html tags except <a> and <table> tags
+            #post_subst_list = map(lambda x: re.sub("<[^aAtT]*>|</[^aAtT]*>", "", x),  post_subst_list) 
+            post_subst_list = map(lambda x: re.sub("<[b-gi-sv-zB-GI-SV-Z].*?>|</[b-gi-sv-zB-GI-SV-Z].*?>", "", x),  post_subst_list) 
 
             # Correct list items
             post_subst_list = map(lambda x: re.sub("^ #", "#", x),  post_subst_list) 
