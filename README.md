@@ -6,7 +6,9 @@ http://trac.sagemath.org/sage_trac/ticket/10637
 
 Usage
 =====
-::
+
+
+
 	python converter.py -sws2rst input.sws
 	python converter.py -rst2sws input.rst output.sws
 
